@@ -10,6 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+/** 
+* @ClassName: MainActivity 
+* @Description: TODO the main activity of application
+* @author coney Geng
+* @date 2014年9月18日 下午2:20:55 
+*  
+*/
 public class MainActivity extends Activity {
 
 	private static final int REQUEST_BT = 1000;
@@ -38,7 +45,7 @@ public class MainActivity extends Activity {
 				
 				if (btEnabled)
 				{
-					Intent i = new Intent(context, hostChat.class);
+					Intent i = new Intent(context, HostChat.class);
 					i.putExtra("un", un.getText().toString());
 					startActivity(i);
 				}else{
@@ -55,7 +62,7 @@ public class MainActivity extends Activity {
 			public void onClick(View arg0) {
 				if (btEnabled)
 				{
-					Intent i = new Intent(context, joinChat.class);
+					Intent i = new Intent(context, JoinChat.class);
 					i.putExtra("un", un.getText().toString());
 					startActivity(i);
 				}else{
@@ -68,6 +75,14 @@ public class MainActivity extends Activity {
     }
 
 
+    
+    /** 
+    * @Title: enableBt 
+    * @Description: TODO open the bluetooth
+    * @param     
+    * @return void    
+    * @throws 
+    */
     private void enableBt()
 	{
 		BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();

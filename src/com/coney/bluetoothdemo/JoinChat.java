@@ -7,18 +7,13 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
 
+import android.R.integer;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.text.Editable;
 import android.text.Spannable;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,7 +23,16 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class joinChat extends Activity {
+import com.coney.bluetoothdemo.util.Util;
+
+/**
+ * @ClassName: JoinChat
+ * @Description: create client
+ * @author coney Geng
+ * @date 2014年9月19日 下午5:28:05
+ * 
+ */
+public class JoinChat extends Activity {
 
 	Context context;
 	ConnectThread connectThread;
@@ -41,6 +45,7 @@ public class joinChat extends Activity {
 	TextView mainChat;
 	Button button;
 	EditText input;
+	int count = 0;
 
 	ConnectedThread connectedThread;
 	BluetoothSocket serverSocket;
@@ -70,6 +75,7 @@ public class joinChat extends Activity {
 		String msg = myName + " has left the chat";
 		if (connectedThread != null) {
 			connectedThread.write(msg.getBytes());
+			connectedThread.cancel();
 		}
 
 		super.onDestroy();
@@ -227,7 +233,6 @@ public class joinChat extends Activity {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
 			mmInStream = tmpIn;
 			mmOutStream = tmpOut;
 		}
@@ -297,7 +302,21 @@ public class joinChat extends Activity {
 		String str = "";
 		try {
 			str = new String(buffer, "UTF-8");
-			mainChat.setText(mainChat.getText().toString() + "\n" + str);
+			String[] strArray = str.split("/");
+			if (Integer.parseInt(strArray[0]) == 1) {
+				mainChat.setText("");
+				count = 1;
+			} else {
+				count += 1;
+			}
+			Util util = new Util();
+			mainChat.setText(mainChat.getText().toString()
+					+ "\n"
+					+ "lost:"
+					+ util.getCount(count, Integer.parseInt(strArray[0]))
+					+ "   delay:"
+					+ util.getDelayTime(System.currentTimeMillis(),
+							Long.parseLong(strArray[1])));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
