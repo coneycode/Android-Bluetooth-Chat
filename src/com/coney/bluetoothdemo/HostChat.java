@@ -8,6 +8,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
 
+import com.coney.bluetoothdemo.matadata.BluetoothData;
+
 import android.R.integer;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -121,7 +123,7 @@ public class HostChat extends Activity {
 				tmp = mBluetoothAdapter
 						.listenUsingRfcommWithServiceRecord(
 								"Bluetooth Chat",
-								UUID.fromString("f820b940-a4ef-11e3-a5e2-0800200c9a66"));
+								UUID.fromString(BluetoothData.uuid));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -210,7 +212,6 @@ public class HostChat extends Activity {
 					Runnable r = new Runnable() {
 						public void run() {
 							addToChat(bufferCopy);
-
 						}
 					};
 

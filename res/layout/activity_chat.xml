@@ -46,5 +46,28 @@
         android:text="Send" />
     
     </LinearLayout>
+    <LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="50dp" >
+    
+    <EditText
+        android:id="@+id/intervalTime"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_weight="1"
+        android:layout_height="50dp" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/intervalButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:text="Send" />
+    
+    </LinearLayout>
 
 </LinearLayout>

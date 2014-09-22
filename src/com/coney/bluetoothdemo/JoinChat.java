@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.coney.bluetoothdemo.matadata.BluetoothData;
 import com.coney.bluetoothdemo.util.Util;
 
 /**
@@ -103,7 +104,7 @@ public class JoinChat extends Activity {
 				// MY_UUID is the app's UUID string, also used by the server
 				// code
 				tmp = device.createRfcommSocketToServiceRecord(UUID
-						.fromString("f820b940-a4ef-11e3-a5e2-0800200c9a66"));
+						.fromString(BluetoothData.uuid));
 			} catch (IOException e) {
 				System.out
 						.println("BTCHAT: Could not create rf comm socket connection");
@@ -172,11 +173,8 @@ public class JoinChat extends Activity {
 					BluetoothDevice dev = (BluetoothDevice) pairedDevices
 							.toArray()[arg2];
 					connectTo(dev);
-
 				}
-
 			});
-
 		}
 	}
 
